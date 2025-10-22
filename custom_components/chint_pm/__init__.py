@@ -178,7 +178,8 @@ class ChintDxsuDevice:
             )
             # ImpEp (current)positive active total energy
             self.data["impep"] = decoder[0]
-            # decoder.skip_bytes(2 * 8)  # Skip to negative energy position
+            # decoder.skip_bytes(2 * 8)
+            # Skip to negative energy position
             # ExpEp (current)negative active total energy
             self.data["expep"] = decoder[5]
 
@@ -228,23 +229,23 @@ class ChintDxsuDevice:
             )
             # documentation say address is 0x401e but this register contain invalid data, maybe only -H version?
             total = await client.read_holding_registers(
-                address=0x4026, count=12, device_id=unit_id
+                address=0x401e, count=20, device_id=unit_id
             )
             # (current) quadrant I reactive total energy
             quadrant_i = await client.read_holding_registers(
-                address=0x4032, count=2, device_id=unit_id
+                address=0x4032, count=10, device_id=unit_id
             )
             # (current) quadrant II reactive total energy
             quadrant_ii = await client.read_holding_registers(
-                address=0x403C, count=2, device_id=unit_id
+                address=0x403C, count=10, device_id=unit_id
             )
             # (current) quadrant III reactive total energy
             quadrant_iii = await client.read_holding_registers(
-                address=0x4046, count=2, device_id=unit_id
+                address=0x4046, count=10, device_id=unit_id
             )
             # (current) quadrant IV reactive total energy
             quadrant_iv = await client.read_holding_registers(
-                address=0x4050, count=2, device_id=unit_id
+                address=0x4050, count=10, device_id=unit_id
             )
 
             out = await asyncio.gather(
@@ -364,7 +365,7 @@ class ChintDxsuDevice:
             )
             # ImpEp (current)positive active total energy
             self.data["impep"] = decoder[0]
-            decoder.skip_bytes(2 * 8)  # Skip to negative energy position
+            # decoder.skip_bytes(2 * 8)  # Skip to negative energy position - to zmienilem
             # ExpEp (current)negative active total energy
             self.data["expep"] = decoder[5]
 
@@ -414,23 +415,23 @@ class ChintDxsuDevice:
             )
             # documentation say address is 0x401e but this register contain invalid data, maybe only -H version?
             total = await client.read_holding_registers(
-                address=0x101E, count=2, device_id=unit_id
+                address=0x401e, count=20, device_id=unit_id
             )
             # (current) quadrant I reactive total energy
             quadrant_i = await client.read_holding_registers(
-                address=0x1032, count=2, device_id=unit_id
+                address=0x1032, count=10, device_id=unit_id
             )
             # (current) quadrant II reactive total energy
             quadrant_ii = await client.read_holding_registers(
-                address=0x103C, count=2, device_id=unit_id
+                address=0x103C, count=10, device_id=unit_id
             )
             # (current) quadrant III reactive total energy
             quadrant_iii = await client.read_holding_registers(
-                address=0x1046, count=2, device_id=unit_id
+                address=0x1046, count=10, device_id=unit_id
             )
             # (current) quadrant IV reactive total energy
             quadrant_iv = await client.read_holding_registers(
-                address=0x1050, count=2, device_id=unit_id
+                address=0x1050, count=10, device_id=unit_id
             )
 
             await asyncio.gather(
